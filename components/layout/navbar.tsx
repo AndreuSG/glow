@@ -9,7 +9,7 @@ import { Menu, X } from "lucide-react"; // Quitar Sparkles de aquí
 import { RiInstagramLine, RiFacebookCircleLine, RiWhatsappLine } from "react-icons/ri";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const playfair = Playfair_Display({ subsets: ["latin"] });
 
@@ -17,6 +17,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
   const normalizedBasePath =
     basePath && basePath.endsWith('/') && basePath !== '/' ? basePath.slice(0, -1) : basePath;
@@ -87,9 +88,7 @@ export function Navbar() {
             <Button
               variant="outline"
               className="ml-4 hidden md:flex hover:text-[#C79F7D] transition-colors"
-              onClick={() => {
-                window.location.href = prefixPath("/contacto");
-              }}
+              onClick={() => router.push("/contacto")}
             >
               Reservar Cita
             </Button>
